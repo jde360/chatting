@@ -63,17 +63,17 @@ class ChatService {
     try {
       //update last message
 
-      await this.chatRepository.updateLastMessage({
-        userId: data.senderId,
-        lastMessage: data.message,
-      });
-      console.log("udate sender side last message");
+      // await this.chatRepository.updateLastMessage({
+      //   userId: data.senderId,
+      //   lastMessage: data.message,
+      // });
+      // console.log("udate sender side last message");
 
-      await this.chatRepository.updateLastMessage({
-        userId: data.receiverId,
-        lastMessage: data.message,
-      });
-      console.log("update receiver side last message");
+      // await this.chatRepository.updateLastMessage({
+      //   userId: data.receiverId,
+      //   lastMessage: data.message,
+      // });
+      // console.log("update receiver side last message");
 
       data.messageId = `${data.senderId}-${data.receiverId}`;
       return await this.chatRepository.createMessage(data);
