@@ -1,4 +1,5 @@
 import { CallRepository } from "../repository/call.repository.js";
+import { callStatus } from "../utils/call_status.js";
 
 class CallService {
   constructor() {
@@ -8,11 +9,13 @@ class CallService {
   createCall = async (data) => {
     try {
       const body = {
-        'name': data.name,
-        'status': callStatus.ringing,
-        'to': data.to,
-        'from': data.from,
-        'duration': 0,
+        name: data.name,
+        status: callStatus.INIT,
+        to: data.to,
+        // 'from': data.from,
+        from: "6710f9da2c4b56960d56477f",
+        durations: 0,
+        sdp: data.sdp,
       };
       return await this.repository.createCall(body);
     } catch (error) {
@@ -26,16 +29,16 @@ class CallService {
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   //update call duration
   updateCallDuration = async (callId, duration) => {
     try {
-      return await this.repository.updateCallDuration({callId, duration});
+      return await this.repository.updateCallDuration({ callId, duration });
     } catch (error) {
       throw error;
     }
-  }
+  };
 
   //get all incomming calls
   getAllIncomingCalls = async () => {
@@ -44,7 +47,7 @@ class CallService {
     } catch (error) {
       throw error;
     }
-  }
+  };
   //get onCallStatus
   getOnCallStatus = async (userId) => {
     try {
@@ -52,7 +55,7 @@ class CallService {
     } catch (error) {
       throw error;
     }
-  }
+  };
   //get all outgoing calls
   getAllOutgoingCalls = async () => {
     try {
@@ -60,7 +63,7 @@ class CallService {
     } catch (error) {
       throw error;
     }
-  }
+  };
   //get call by id
   getCallById = async (callId) => {
     try {
@@ -68,8 +71,6 @@ class CallService {
     } catch (error) {
       throw error;
     }
-  }
-
-
+  };
 }
-export default CallService
+export default CallService;
